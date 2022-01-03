@@ -1,20 +1,25 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li @click="step--">Back</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 0 || step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <UseContainer v-bind:instadata="instadata" v-bind:step="step" />
+  <UseContainer
+    v-bind:makeimageurl="makeimageurl"
+    v-bind:instadata="instadata"
+    v-bind:step="step"
+  />
   <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -31,6 +36,7 @@ export default {
     return {
       instadata: instadata,
       step: 0,
+      makeimageurl: "",
     };
   },
 
@@ -38,12 +44,32 @@ export default {
     UseContainer: Container,
   },
   methods: {
+    publish() {
+      const plusobject = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: "https://placeimg.com/640/480/arch",
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
+        filter: "perpetua",
+      };
+      this.instadata.unshift(plusobject);
+      this.step = 0;
+    },
     more() {
       axios
         .get("https://codingapple1.github.io/vue/more0.json")
         .then((result) => {
           this.instadata.push(result.data);
         });
+    },
+    upload(e) {
+      let upfile = e.target.files;
+      let makeurl = URL.createObjectURL(upfile[0]);
+      this.makeimageurl = makeurl;
+      this.step++;
     },
   },
 };

@@ -9,7 +9,10 @@
     </div>
 
     <div v-if="step == 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="`background-image:url(${makeimageurl})`"
+      ></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -20,7 +23,10 @@
     </div>
 
     <div v-if="step == 2">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="`background-image:url(${makeimageurl})`"
+      ></div>
       <div class="write">
         <textarea class="write-box">write!</textarea>
       </div>
@@ -39,6 +45,7 @@ export default {
   props: {
     instadata: Array,
     step: Number,
+    makeimageurl: String,
   },
 };
 </script>
