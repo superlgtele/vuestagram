@@ -1,22 +1,38 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <div
+        class="profile"
+        :style="{ backgroundImage: `url(${instadata.userImage})` }"
+      ></div>
+      <span class="profile-name">{{ instadata.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${instadata.postImage})` }"
+    ></div>
     <div class="post-content">
-      <p>43 Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
-      <p class="date">May 15</p>
+      <p>{{ instadata.likes }} Likes</p>
+      <p>
+        <strong>{{ instadata.name }}</strong> {{ instadata.content }}
+      </p>
+      <p class="date">{{ instadata.date }}</p>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
 export default {
+  name: "Post",
+  data() {
+    return {};
+  },
+  props: {
+    instadata: Array,
+  },
 
-}
+  components: {},
+};
 </script>
 
 <style>
@@ -24,7 +40,6 @@ export default {
   width: 100%;
 }
 .profile {
-  background-image: url("https://placeimg.com/100/100/arch");
   width: 30px;
   height: 30px;
   background-size: 100%;
@@ -43,7 +58,6 @@ export default {
   padding: 10px;
 }
 .post-body {
-  background-image: url("https://placeimg.com/640/480/animals");
   height: 450px;
   background-position: center;
   background-size: cover;
@@ -57,5 +71,5 @@ export default {
   font-size: 11px;
   color: grey;
   margin-top: -8px;
-} 
+}
 </style>

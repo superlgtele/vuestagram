@@ -9,32 +9,44 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <UseContainer />
+  <UseContainer v-bind:instadata="instadata" v-bind:step="step" />
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
- </div>
+  </div>
 </template>
 
 <script>
-import Container from './components/Container'
+import Container from "./components/Container";
+import { instadata } from "./assets/postdata";
+import axios from "axios";
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-
-    }
+      instadata: instadata,
+      step: 0,
+    };
   },
 
   components: {
-    UseContainer : Container,
+    UseContainer: Container,
   },
-  
-}
+  methods: {
+    more() {
+      axios
+        .get("https://codingapple1.github.io/vue/more0.json")
+        .then((result) => {
+          this.instadata.push(result.data);
+        });
+    },
+  },
+};
 </script>
 
 <style>
