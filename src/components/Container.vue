@@ -10,25 +10,34 @@
 
     <div v-if="step == 1">
       <div
+        :class="choicefilter"
         class="upload-image"
         :style="`background-image:url(${makeimageurl})`"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <UseFilterBox
+          v-bind:makeimageurl="makeimageurl"
+          v-bind:manyfilter="a"
+          v-for="(a, i) in manyfilter"
+          :key="i"
+          >{{ a }}</UseFilterBox
+        >
       </div>
     </div>
 
     <div v-if="step == 2">
       <div
+        :class="choicefilter"
         class="upload-image"
         :style="`background-image:url(${makeimageurl})`"
       ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @input="$emit('write', $event.target.value)"
+          class="write-box"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
@@ -36,11 +45,51 @@
 
 <script>
 import Post from "./Post";
+import FilterBox from "./FilterBox.vue";
 
 export default {
   name: "Container",
+  data() {
+    return {
+      manyfilter: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+      choicefilter: "",
+    };
+  },
+  mounted() {
+    this.emitter.on("clickfilter", (result) => {
+      this.choicefilter = result;
+    });
+  },
   components: {
     UsePost: Post,
+    UseFilterBox: FilterBox,
   },
   props: {
     instadata: Array,

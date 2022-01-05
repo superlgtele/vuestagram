@@ -14,6 +14,7 @@
     v-bind:makeimageurl="makeimageurl"
     v-bind:instadata="instadata"
     v-bind:step="step"
+    @write="uploadwrite = $event"
   />
   <button @click="more">더보기</button>
 
@@ -37,7 +38,14 @@ export default {
       instadata: instadata,
       step: 0,
       makeimageurl: "",
+      uploadwrite: "",
+      choicefilter: "",
     };
+  },
+  mounted() {
+    this.emitter.on("clickfilter", (result) => {
+      this.choicefilter = result;
+    });
   },
 
   components: {
@@ -48,12 +56,12 @@ export default {
       const plusobject = {
         name: "Kim Hyun",
         userImage: "https://placeimg.com/100/100/arch",
-        postImage: "https://placeimg.com/640/480/arch",
+        postImage: this.makeimageurl,
         likes: 36,
         date: "May 15",
         liked: false,
-        content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
-        filter: "perpetua",
+        content: this.uploadwrite,
+        filter: this.choicefilter,
       };
       this.instadata.unshift(plusobject);
       this.step = 0;
