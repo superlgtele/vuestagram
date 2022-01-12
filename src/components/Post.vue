@@ -8,12 +8,13 @@
       <span class="profile-name">{{ instadata.name }}</span>
     </div>
     <div
+      @click="$store.commit('likesplus')"
       :class="instadata.filter"
       class="post-body"
       :style="{ backgroundImage: `url(${instadata.postImage})` }"
     ></div>
     <div class="post-content">
-      <p>{{ instadata.likes }} Likes</p>
+      <p>{{ $store.state.likes }} Likes</p>
       <p>
         <strong>{{ instadata.name }}</strong> {{ instadata.content }}
       </p>

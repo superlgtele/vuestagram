@@ -10,6 +10,11 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <h4>Vuex {{ $store.state.name }}</h4>
+  <button @click="$store.commit('changename')">Vuex 데이터바꾸기</button>
+  <p>{{ $store.state.moreboard }}</p>
+  <button @click="$store.dispatch('getData')">Vuex Actions기능</button>
+
   <UseContainer
     v-bind:makeimageurl="makeimageurl"
     v-bind:instadata="instadata"
