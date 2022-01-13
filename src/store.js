@@ -8,6 +8,7 @@ const store = createStore({
       likes: 30,
       clicklikes: false,
       moreboard: {},
+      // name2: "Hong",
     };
   },
   mutations: {

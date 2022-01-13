@@ -10,10 +10,11 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <!-- <p>{{ name2 }}</p>
   <h4>Vuex {{ $store.state.name }}</h4>
   <button @click="$store.commit('changename')">Vuex 데이터바꾸기</button>
   <p>{{ $store.state.moreboard }}</p>
-  <button @click="$store.dispatch('getData')">Vuex Actions기능</button>
+  <button @click="$store.dispatch('getData')">Vuex Actions기능</button> -->
 
   <UseContainer
     v-bind:makeimageurl="makeimageurl"
@@ -35,6 +36,7 @@
 import Container from "./components/Container";
 import { instadata } from "./assets/postdata";
 import axios from "axios";
+// import { mapState } from "vuex";
 
 export default {
   name: "App",
@@ -52,10 +54,12 @@ export default {
       this.choicefilter = result;
     });
   },
-
   components: {
     UseContainer: Container,
   },
+  // computed: {
+  //   ...mapState(["name2"]),
+  // },
   methods: {
     publish() {
       const plusobject = {
